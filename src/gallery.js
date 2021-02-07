@@ -54,7 +54,7 @@ console.log(galleryRef);
 
 const closeEscape = e => {
 
-    if (e.code === 'Escape') {
+    if (e.key === 'Escape') {
        openModalBtn.classList.remove('is-open');
         window.removeEventListener('keydown', closeEscape);
     }
@@ -62,22 +62,23 @@ const closeEscape = e => {
 
 ///Пролистывание изображений галереи в открытом модальном окне клавишами "влево" и "вправо" /////////
 
-const  pressingRight = e => {
-    if (e.code === "ArrowRight") {
+const pressingRight = e => {
+  
+    if (e.key === "ArrowRight") {
         idx = gallery.length - 1 === idx ? 0 : idx + 1;
         const { original, description } = gallery[idx];
         imageBox.src = original;
         imageBox.alt = description;
        
     }
-} ;
+};
+
 const pressingLeft = e => {
-    if (e.code === "ArrowLeft") {
+    if (e.key === "ArrowLeft") {
         idx = idx === 0 ? gallery.length - 1 : idx - 1;
         const { original, description } = gallery[idx];
         imageBox.src = original;
         imageBox.alt = description;
-       
     }
 };
 

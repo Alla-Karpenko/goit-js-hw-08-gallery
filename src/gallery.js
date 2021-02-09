@@ -24,8 +24,7 @@ function onGalleryClick(event) {
     setLargeImageSrc(largeImageURL); 
 
    window.addEventListener('keydown', closeEscape)
-    window.addEventListener('keydown', pressingRight)
-    window.addEventListener('keydown', pressingLeft);
+ 
 };
  
 function setLargeImageSrc(url) {
@@ -36,15 +35,13 @@ function onGalleryCloseBtn() {
     openModalBtn.classList.remove('is-open');
     imageBox.src = "";
     window.removeEventListener('click', onGalleryClick);
-    window.removeEventListener('keydown', pressingRight);
-    window.removeEventListener('keydown', pressingLeft);
+   
 };
 
-gallery.forEach((el, idx) => {
-    galleryRef.insertAdjacentHTML('beforeend', `<li class="gallery__item">
-    <a class="gallery__link" href='${el.original}'>
-    <img class="gallery__image" src='${el.preview}' data-source='${el.original}' alt='${el.description}' data-index="${idx}"/></a></li>`);
-})
+const markup = gallery.reduce((acc, { original, preview, description }, idx) => acc + `<li class="gallery__item"><a class="gallery__link" href='${original}">
+<img class="gallery__image" src="${preview}" data-source="${original}" alt="${description}" data-index="${idx}"/></a></li>`, '')
+galleryRef.insertAdjacentHTML('beforeend', markup)
+
 console.log(galleryRef);
 
 
@@ -58,6 +55,8 @@ const closeEscape = e => {
        openModalBtn.classList.remove('is-open');
         window.removeEventListener('keydown', closeEscape);
     }
+    pressingRight(e);
+    pressingLeft(e);
 };
 
 ///Пролистывание изображений галереи в открытом модальном окне клавишами "влево" и "вправо" /////////
@@ -69,11 +68,10 @@ const pressingRight = e => {
         const { original, description } = gallery[idx];
         imageBox.src = original;
         imageBox.alt = description;
-       
     }
-};
+   };
 
-const pressingLeft = e => {
+   const pressingLeft = e => {
     if (e.key === "ArrowLeft") {
         idx = idx === 0 ? gallery.length - 1 : idx - 1;
         const { original, description } = gallery[idx];

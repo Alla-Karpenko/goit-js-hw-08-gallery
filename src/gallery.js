@@ -38,8 +38,11 @@ function onGalleryCloseBtn() {
    
 };
 
-const markup = gallery.reduce((acc, { original, preview, description }, idx) => acc + `<li class="gallery__item"><a class="gallery__link" href='${original}">
-<img class="gallery__image" src="${preview}" data-source="${original}" alt="${description}" data-index="${idx}"/></a></li>`, '')
+
+
+const markup = gallery.reduce((acc, { original, preview, description }, idx) => acc +=
+    `<li class="gallery__item"><a class="gallery__link" hef="${original}">
+    <img class="gallery__image" src="${preview}" data-source="${original}" alt="${description}" data-index="${idx}"></a></li>`, '');
 galleryRef.insertAdjacentHTML('beforeend', markup)
 
 console.log(galleryRef);
@@ -81,17 +84,7 @@ const pressingRight = e => {
 };
 
 
-// const arr = galleryImages.map((el, idx) => {
-//      `<li class="gallery__item">
-//     <a class="gallery__link" href='${el.original}'>
-//     <img class="gallery__image" src='${el.preview}' data-source='${el.original}' alt='${el.description}' data-index="${idx}"/></a></li>`;
-// })
-// galleryRef.insertAdjacentHTML('beforeend', ...arr)
 
-
-// const markup = galleryImages.reduce((acc, {original, preview, description}, idx) => acc + `<li class="gallery__item"><a class="gallery__link" href='${original}"><img class="gallery__image" src="${preview}" data-source="${original}" alt="${description}" data-index="${idx}"/></a></li>`, '')
-// galleryRef.insertAdjacentHTML('beforeend', markup)
-// console.log(galleryRef);
 
 
 

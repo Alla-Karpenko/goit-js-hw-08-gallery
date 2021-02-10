@@ -23,7 +23,7 @@ function onGalleryClick(event) {
 
     setLargeImageSrc(largeImageURL); 
 
-   window.addEventListener('keydown', closeEscape)
+   window.addEventListener('keydown', handleKeyPress)
  
 };
  
@@ -52,19 +52,19 @@ console.log(galleryRef);
  
 //Закрытие модального окна по нажатию клавиши ESC//
 
-const closeEscape = e => {
+const handleKeyPress = e => {
 
     if (e.key === 'Escape') {
        openModalBtn.classList.remove('is-open');
-        window.removeEventListener('keydown', closeEscape);
+        window.removeEventListener('keydown',  handleKeyPress);
     }
-    pressingRight(e);
-    pressingLeft(e);
+   showPrevImage(e);
+    showNextImage(e);
 };
 
 ///Пролистывание изображений галереи в открытом модальном окне клавишами "влево" и "вправо" /////////
 
-const pressingRight = e => {
+const showNextImage = e => {
   
     if (e.key === "ArrowRight") {
         idx = gallery.length - 1 === idx ? 0 : idx + 1;
@@ -72,9 +72,9 @@ const pressingRight = e => {
         imageBox.src = original;
         imageBox.alt = description;
     }
-   };
+};
 
-   const pressingLeft = e => {
+const showPrevImage = e => {
     if (e.key === "ArrowLeft") {
         idx = idx === 0 ? gallery.length - 1 : idx - 1;
         const { original, description } = gallery[idx];
